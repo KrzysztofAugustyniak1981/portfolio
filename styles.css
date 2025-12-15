@@ -102,7 +102,8 @@ header {
     font-weight: 400;
     font-size: 16px;
     text-align: center;
-    margin-top: 100px;
+    margin: 100px auto;
+    width: 100%;
 }
 
 .name {
@@ -122,8 +123,9 @@ header {
     font-size: 32px;
     letter-spacing: 36%;
     text-align: center;
-    margin-top: 0px;
+    margin: 0px auto;
     max-height: 30px;
+    width: 524px;
 }
 
 footer {
@@ -188,5 +190,18 @@ footer {
 }
 main {
     background-color: #FFFFFF;
-    height: 20px;
+}
+.main-messages {
+    max-width: 1200px;
+    width: 100%;
+}
+.messageMain {
+    margin: 65px 0px;
+}
+.messagesMainText {
+    width: 100%;
+    font-family: league Spartan;
+    font-weight: 700;
+    font-size: 16px;
+    color: #1F2041;
 }
