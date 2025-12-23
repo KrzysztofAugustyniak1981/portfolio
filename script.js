@@ -29,20 +29,40 @@ const contactPeople = [
 const projects = [
   {
     title: "Calculator",
-    technologies: ["HTML"]},
+    technologies: ["HTML"]
+  },
   {
     title: "Non-governmental organization",
-    technologies: ["HTML", "CSS"]},
+    technologies: ["HTML", "CSS"]
+  },
   {
     title: "Calculator program",
-    technologies: ["Javascript"]},
+    technologies: ["Javascript"]
+  },
   {
     title: "Calculator",
-    technologies: ["HTML"]},
+    technologies: ["HTML"]
+  },
   {
     title: "Non-governmental organization",
-    technologies: ["HTML", "CSS"]},
+    technologies: ["HTML", "CSS"]
+  },
 ];
+const skills = [
+  { name: "HTML", years: 3 },
+  { name: "CSS", years: 2 },
+  { name: "Javascript", years: 2 },
+  { name: "Git", years: 3 },
+  { name: "Figma", years: 1 },
+  { name: "Google Chrome", years: 3 },
+  { name: "Visual Studio Code", years: 3 },
+  { name: "Github", years: 3 },
+];
+
+
+skills.forEach(skill => {
+    skill.icon = `././Pictures/${skill.name}.png`;
+  });
 
 //uchwytanie elementów
 const messagesLink = document.querySelectorAll(".messagesLink");
@@ -53,13 +73,52 @@ const homeLink = document.querySelectorAll(".homeLink");
 const nameClass = document.querySelector(".name");
 const jobClass = document.querySelector(".job");
 const main = document.querySelector("main");
+const HomeProjectsVisible = 3;
+let homeProjectIndex = 0;
+
 
 //dodanie event listenerów
-messagesLink.forEach(link => link.addEventListener("click", messagesPage));
-projectsLink.forEach(link => link.addEventListener("click", projectsPage));
-aboutLink.forEach(link => link.addEventListener("click", aboutPage));
-contactLink.forEach(link => link.addEventListener("click", contactPage));
-homeLink.forEach(link => link.addEventListener("click", homePage));
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    homePage();
+  },
+  { once: true }
+);
+homeLink.forEach(link =>
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    homePage();
+  })
+);
+
+projectsLink.forEach(link =>
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    projectsPage();
+  })
+);
+
+aboutLink.forEach(link =>
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    aboutPage();
+  })
+);
+
+contactLink.forEach(link =>
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    contactPage();
+  })
+);
+
+messagesLink.forEach(link =>
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    messagesPage();
+  })
+);
 
 
 //funkcje stron
@@ -256,13 +315,65 @@ function aboutPage() {
 <path d="M9.64959 1.28033C9.28347 0.987437 9.28347 0.512563 9.64959 0.21967C10.0157 -0.0732233 10.6093 -0.0732233 10.9754 0.21967L15.9754 4.21967C16.3415 4.51256 16.3415 4.98744 15.9754 5.28033L10.9754 9.28033C10.6093 9.57322 10.0157 9.57322 9.64959 9.28033C9.28347 8.98744 9.28347 8.51256 9.64959 8.21967L13.0492 5.5H0.9375C0.419734 5.5 0 5.16421 0 4.75C0 4.33579 0.419734 4 0.9375 4H13.0492L9.64959 1.28033Z" fill="#1F2041"/>
 </svg>&nbsp; &nbsp; Contact me</button>
 `;
-const aboutButton = document.querySelector(".aboutButton");
-aboutButton.addEventListener("click", contactPage);
+  const aboutButton = document.querySelector(".aboutButton");
+  aboutButton.addEventListener("click", contactPage);
 }
 function homePage() {
   activClassOff();
   clearMain();
+
   homeLink.forEach(link => link.classList.add("active"));
+
+  nameClass.textContent = "KRZYSZTOF AUGUSTYNIAK";
+  jobClass.textContent = "FRONT-END DEVELOPER";
+
+  main.innerHTML = `
+    <div class="homePageView">
+      <img src="./Pictures/f2dbb7e465bd82241abc68d7da376fd7d832d4fd.jpg" class="homePhoto">
+
+      <div class="homeTitle">About me</div>
+      <div class="homeTextParagraph">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      </div>
+
+      <div class="homeTitle">My Skills</div>
+      <div class="homeSkills"></div>
+    </div>
+    <div class="homeProjects"></div>
+    <div class="homeButtonContainer"></div>
+  `;
+  const skillsContainer = document.querySelector(".homeSkills");
+  skillsContainer.innerHTML = "";
+
+  skills.forEach(skill => {
+    const div = document.createElement("div");
+    div.className = "skill";
+
+    div.innerHTML = `
+      <img src="${skill.icon}" alt="${skill.name}"
+           onerror="this.onerror=null; this.src='./Pictures/html.png';">
+      <div class="skill-icon">
+        <h4>${skill.name}</h4>
+        <div class="skill-dots">${createDots(skill.years)}</div>
+        <p>${skill.years} years</p>
+      </div>
+    `;
+
+    skillsContainer.appendChild(div);
+  });
+  homeProjectIndex = 0;
+  renderProjectsPreview(".homeProjects");
+}
+function createDots(years) {
+  const max = 5;
+  const filled = Math.min(years, max);
+  let dots = "";
+
+  for (let i = 1; i <= max; i++) {
+    dots += `<span class="dot ${i <= filled ? "filled" : ""}"></span>`;
+  }
+
+  return dots;
 }
 
 function activClassOff() {
@@ -304,48 +415,49 @@ function createProjectModal() {
   modal.onclick = e => {
     if (e.target === modal) modal.remove();
   };
-    modal.querySelector(".add-btn").onclick = () => {
-  const titleInput = document.getElementById("projectTitle");
-  const techInput = document.getElementById("projectTech");
+  modal.querySelector(".add-btn").onclick = () => {
+    const titleInput = document.getElementById("projectTitle");
+    const techInput = document.getElementById("projectTech");
 
-  const titleError = document.getElementById("titleError");
-  const techError = document.getElementById("techError");
+    const titleError = document.getElementById("titleError");
+    const techError = document.getElementById("techError");
 
-  let isValid = true;
+    let isValid = true;
 
-  titleError.textContent = "";
-  techError.textContent = "";
-  titleInput.style.borderBottom = "2px solid #1F2041";
-  techInput.style.borderBottom = "2px solid #1F2041";
+    titleError.textContent = "";
+    techError.textContent = "";
+    titleInput.style.borderBottom = "2px solid #1F2041";
+    techInput.style.borderBottom = "2px solid #1F2041";
 
-  if (titleInput.value.trim().length < 3) {
-    titleError.textContent = "The title must be at least 3 characters long";
-    titleInput.style.borderBottom = "2px solid #AF0808";
-    isValid = false;
-  } else if (titleInput.value.trim().length > 30) {
-    titleError.textContent = "The title must not exceed 30 characters";
-    titleInput.style.borderBottom = "2px solid #AF0808";
-    isValid = false;
-  }
+    if (titleInput.value.trim().length < 3) {
+      titleError.textContent = "The title must be at least 3 characters long";
+      titleInput.style.borderBottom = "2px solid #AF0808";
+      isValid = false;
+    } else if (titleInput.value.trim().length > 30) {
+      titleError.textContent = "The title must not exceed 30 characters";
+      titleInput.style.borderBottom = "2px solid #AF0808";
+      isValid = false;
+    }
 
-  if (techInput.value.trim() === "") {
-    techError.textContent = "Please add some technologies";
-    techInput.style.borderBottom = "2px solid #AF0808";
-    isValid = false;
-  }
+    if (techInput.value.trim() === "") {
+      techError.textContent = "Please add some technologies";
+      techInput.style.borderBottom = "2px solid #AF0808";
+      isValid = false;
+    }
 
-  if (!isValid) return;
+    if (!isValid) return;
 
-  projects.push({
-    title: titleInput.value.trim(),
-    technologies: techInput.value.split(",").map(t => t.trim())
-  });
+    projects.push({
+      title: titleInput.value.trim(),
+      technologies: techInput.value.split(",").map(t => t.trim())
+    });
 
-  modal.remove();
-  renderProjects();
-};
+    modal.remove();
+    renderProjects();
+  };
 
 }
+
 function renderProjects() {
   const container = document.querySelector(".projectsPageView");
   container.innerHTML = "";
@@ -362,8 +474,8 @@ function renderProjects() {
     card.className = "projectCard";
 
     const techList = project.technologies
-    .map(tech => `<li>${tech}</li>`)
-    .join("");
+      .map(tech => `<li>${tech}</li>`)
+      .join("");
 
     card.innerHTML = `
       <button class="delete-btn" data-index="${index}">
@@ -381,9 +493,67 @@ function renderProjects() {
   });
   document.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", e => {
-      const index = e.target.dataset.index;
-      projects.splice(index, 1);
-      renderProjects();
-    });
+  const index = e.currentTarget.dataset.index;
+  projects.splice(index, 1);
+  renderProjects();
+});
   });
+}
+
+function renderProjectsPreview(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  container.innerHTML = "";
+
+  if (projects.length === 0) {
+    container.innerHTML = "<p>No projects available</p>";
+    return;
+  }
+
+  for (let i = 0; i < HomeProjectsVisible; i++) {
+    const project =
+      projects[(homeProjectIndex + i) % projects.length];
+
+    const card = document.createElement("div");
+    card.className = "projectCard";
+
+    card.innerHTML = `
+      <h3>${project.title}</h3>
+      <ul class="tech-list">
+        ${project.technologies.map(tech => `<li>${tech}</li>`).join("")}
+      </ul>
+    `;
+
+    container.appendChild(card);
+  }
+
+  renderHomeControls();
+}
+
+
+function renderHomeControls() {
+  const wrapper = document.querySelector(".homeButtonContainer");
+  wrapper.innerHTML = "";
+
+  if (projects.length <= HomeProjectsVisible) return;
+  
+  const prevBtn = document.createElement("button");
+  prevBtn.innerHTML = `<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.6437 25.8976C18.1286 26.3889 18.1234 27.1804 17.632 27.6653C17.1407 28.1503 16.3492 28.1451 15.8643 27.6537L9.24161 20.9434C8.75668 20.452 8.76188 19.6606 9.25323 19.1756L15.9636 12.5529C16.4549 12.068 17.2464 12.0732 17.7313 12.5645C18.2162 13.0559 18.211 13.8473 17.7197 14.3323L13.1572 18.8352L29.3058 18.9413C29.9961 18.9459 30.552 19.5092 30.5475 20.1995C30.543 20.8898 29.9797 21.4458 29.2893 21.4413L13.1408 21.3351L17.6437 25.8976Z" fill="#1F2041"/></svg>`;
+
+  const nextBtn = document.createElement("button");
+  nextBtn.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4494 14.2172C21.9612 13.7291 21.9612 12.9376 22.4494 12.4495C22.9375 11.9613 23.729 11.9613 24.2171 12.4495L30.8838 19.1161C31.372 19.6043 31.372 20.3957 30.8838 20.8839L24.2171 27.5506C23.729 28.0387 22.9375 28.0387 22.4494 27.5506C21.9612 27.0624 21.9612 26.2709 22.4494 25.7828L26.9822 21.25H10.8333C10.1429 21.25 9.58325 20.6904 9.58325 20C9.58325 19.3096 10.1429 18.75 10.8333 18.75H26.9822L22.4494 14.2172Z" fill="#1F2041"/></svg>`;
+
+  prevBtn.onclick = () => {
+  homeProjectIndex =
+    (homeProjectIndex - 1 + projects.length) % projects.length;
+  renderProjectsPreview(".homeProjects");
+};
+
+  nextBtn.onclick = () => {
+  homeProjectIndex =
+    (homeProjectIndex + 1) % projects.length;
+  renderProjectsPreview(".homeProjects");
+};
+
+  wrapper.appendChild(prevBtn);
+  wrapper.appendChild(nextBtn);
 }
