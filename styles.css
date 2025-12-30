@@ -714,11 +714,11 @@ textarea::placeholder {
     }
 
     .topnav .icon {
-    position: fixed;
-    top: 20px;
-    right: 16px;
-    z-index: 1001;
-}
+        position: fixed;
+        top: 20px;
+        right: 16px;
+        z-index: 1001;
+    }
 
     .topnav a:not(:first-child) {
         display: none;
