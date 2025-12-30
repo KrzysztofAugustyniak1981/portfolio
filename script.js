@@ -1,13 +1,3 @@
-
-//hamburger menu
-function hamburger() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
 //zmienne tablice
 const contactPeople = [
   {
@@ -61,8 +51,8 @@ const skills = [
 
 
 skills.forEach(skill => {
-    skill.icon = `././Pictures/${skill.name}.png`;
-  });
+  skill.icon = `././Pictures/${skill.name}.png`;
+});
 
 //uchwytanie elementów
 const messagesLink = document.querySelectorAll(".messagesLink");
@@ -325,7 +315,7 @@ function homePage() {
   homeLink.forEach(link => link.classList.add("active"));
 
   nameClass.textContent = "KRZYSZTOF AUGUSTYNIAK";
-  jobClass.textContent = "FRONT-END DEVELOPER";
+  jobClass.textContent = "WEB-DESIGNER"
 
   main.innerHTML = `
     <div class="homePageView">
@@ -493,10 +483,10 @@ function renderProjects() {
   });
   document.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", e => {
-  const index = e.currentTarget.dataset.index;
-  projects.splice(index, 1);
-  renderProjects();
-});
+      const index = e.currentTarget.dataset.index;
+      projects.splice(index, 1);
+      renderProjects();
+    });
   });
 }
 
@@ -535,25 +525,46 @@ function renderHomeControls() {
   wrapper.innerHTML = "";
 
   if (projects.length <= HomeProjectsVisible) return;
-  
-  const prevBtn = document.createElement("button");
-  prevBtn.innerHTML = `<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.6437 25.8976C18.1286 26.3889 18.1234 27.1804 17.632 27.6653C17.1407 28.1503 16.3492 28.1451 15.8643 27.6537L9.24161 20.9434C8.75668 20.452 8.76188 19.6606 9.25323 19.1756L15.9636 12.5529C16.4549 12.068 17.2464 12.0732 17.7313 12.5645C18.2162 13.0559 18.211 13.8473 17.7197 14.3323L13.1572 18.8352L29.3058 18.9413C29.9961 18.9459 30.552 19.5092 30.5475 20.1995C30.543 20.8898 29.9797 21.4458 29.2893 21.4413L13.1408 21.3351L17.6437 25.8976Z" fill="#1F2041"/></svg>`;
 
+  const prevBtn = document.createElement("button");
   const nextBtn = document.createElement("button");
-  nextBtn.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4494 14.2172C21.9612 13.7291 21.9612 12.9376 22.4494 12.4495C22.9375 11.9613 23.729 11.9613 24.2171 12.4495L30.8838 19.1161C31.372 19.6043 31.372 20.3957 30.8838 20.8839L24.2171 27.5506C23.729 28.0387 22.9375 28.0387 22.4494 27.5506C21.9612 27.0624 21.9612 26.2709 22.4494 25.7828L26.9822 21.25H10.8333C10.1429 21.25 9.58325 20.6904 9.58325 20C9.58325 19.3096 10.1429 18.75 10.8333 18.75H26.9822L22.4494 14.2172Z" fill="#1F2041"/></svg>`;
+
+  if (window.screen.width < 768) {
+    prevBtn.innerHTML = `<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.6437 25.8976C18.1286 26.3889 18.1234 27.1804 17.632 27.6653C17.1407 28.1503 16.3492 28.1451 15.8643 27.6537L9.24161 20.9434C8.75668 20.452 8.76188 19.6606 9.25323 19.1756L15.9636 12.5529C16.4549 12.068 17.2464 12.0732 17.7313 12.5645C18.2162 13.0559 18.211 13.8473 17.7197 14.3323L13.1572 18.8352L29.3058 18.9413C29.9961 18.9459 30.552 19.5092 30.5475 20.1995C30.543 20.8898 29.9797 21.4458 29.2893 21.4413L13.1408 21.3351L17.6437 25.8976Z" fill="#1F2041"/></svg>`;
+    nextBtn.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4494 14.2172C21.9612 13.7291 21.9612 12.9376 22.4494 12.4495C22.9375 11.9613 23.729 11.9613 24.2171 12.4495L30.8838 19.1161C31.372 19.6043 31.372 20.3957 30.8838 20.8839L24.2171 27.5506C23.729 28.0387 22.9375 28.0387 22.4494 27.5506C21.9612 27.0624 21.9612 26.2709 22.4494 25.7828L26.9822 21.25H10.8333C10.1429 21.25 9.58325 20.6904 9.58325 20C9.58325 19.3096 10.1429 18.75 10.8333 18.75H26.9822L22.4494 14.2172Z" fill="#1F2041"/></svg>`;
+  } else {
+    prevBtn.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M25.7829 22.4495C26.271 21.9613 27.0625 21.9613 27.5506 22.4495C28.0388 22.9376 28.0388 23.7291 27.5506 24.2173L20.884 30.8839C20.3958 31.3721 19.6044 31.3721 19.1162 30.8839L12.4495 24.2173C11.9614 23.7291 11.9614 22.9376 12.4495 22.4495C12.9377 21.9613 13.7291 21.9613 14.2173 22.4495L18.7501 26.9823V10.8334C18.7501 10.143 19.3097 9.58337 20.0001 9.58337C20.6904 9.58337 21.2501 10.143 21.2501 10.8334V26.9823L25.7829 22.4495Z" fill="#1F2041"/>
+</svg>
+`;
+    nextBtn.innerHTML = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.2171 17.5505C13.729 18.0387 12.9375 18.0387 12.4494 17.5505C11.9612 17.0624 11.9612 16.2709 12.4494 15.7827L19.116 9.11608C19.6042 8.62792 20.3956 8.62792 20.8838 9.11608L27.5505 15.7827C28.0386 16.2709 28.0386 17.0624 27.5505 17.5505C27.0623 18.0387 26.2709 18.0387 25.7827 17.5505L21.2499 13.0177V29.1666C21.2499 29.857 20.6903 30.4166 19.9999 30.4166C19.3096 30.4166 18.7499 29.857 18.7499 29.1666V13.0177L14.2171 17.5505Z" fill="#1F2041"/>
+</svg>
+`;
+  }
 
   prevBtn.onclick = () => {
-  homeProjectIndex =
-    (homeProjectIndex - 1 + projects.length) % projects.length;
-  renderProjectsPreview(".homeProjects");
-};
+    homeProjectIndex =
+      (homeProjectIndex - 1 + projects.length) % projects.length;
+    renderProjectsPreview(".homeProjects");
+  };
 
   nextBtn.onclick = () => {
-  homeProjectIndex =
-    (homeProjectIndex + 1) % projects.length;
-  renderProjectsPreview(".homeProjects");
-};
+    homeProjectIndex =
+      (homeProjectIndex + 1) % projects.length;
+    renderProjectsPreview(".homeProjects");
+  };
 
   wrapper.appendChild(prevBtn);
   wrapper.appendChild(nextBtn);
+}
+
+//hamburger menu
+function hamburger() {
+  let x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
 }

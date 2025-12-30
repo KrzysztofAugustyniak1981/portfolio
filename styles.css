@@ -5,8 +5,7 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    align-items: center;
-    justify-content: center;
+
     min-height: 100vh
 }
 
@@ -18,6 +17,7 @@ header {
     padding: 37px 120px 37px 120px;
     background-color: #1F2041;
     font-family: Roboto;
+    margin: 0 auto;
 }
 
 .top {
@@ -34,6 +34,8 @@ header {
     font-weight: 700;
     font-size: 36px;
     color: #ADB6C4;
+    position: relative;
+    z-index: 1002;
 }
 
 .logo span {
@@ -63,40 +65,6 @@ header {
     color: #ADB6C4;
 }
 
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-    display: none;
-}
-
-@media screen and (max-width: 600px) {
-    .topnav a:not(:first-child) {
-        display: none;
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 600px) {
-    .topnav.responsive {
-        position: relative;
-    }
-
-    .topnav.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-}
 
 .hero {
     font-family: League Gothic;
@@ -113,8 +81,6 @@ header {
     font-weight: 400;
     font-size: 96px;
     text-align: center;
-    margin: 0px;
-    max-height: 108px;
 }
 
 .job {
@@ -137,6 +103,7 @@ footer {
     justify-content: space-between;
     padding: 80px 120px;
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .footer-left {
@@ -195,6 +162,7 @@ main {
     background-color: #FFFFFF;
     max-width: 1200px;
     width: 100%;
+    margin: 0 auto;
 }
 
 .main-messages {
@@ -645,4 +613,210 @@ textarea::placeholder {
     cursor: pointer;
     box-shadow: 0px 4px 4px 0px #00000040;
     display: block;
+}
+
+.topnav .icon {
+    display: none;
+}
+
+
+/*Responsywność*/
+
+@media only screen and (max-width: 930px) {
+    .hero .name {
+        font-size: 72px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 16px 0px;
+        height: 500px;
+        width: 100%;
+    }
+
+    main {
+        margin: 84px auto 0px;
+        width: 100%;
+    }
+
+    .homePageView {
+        padding: 0px 16px 28px 16px;
+        width: 95vw;
+    }
+
+    .homePageView img {
+        max-width: none;
+        max-height: none;
+        overflow: hidden;
+        padding-bottom: 65px;
+        height: 311px;
+        margin: 0 0 85px 0;
+    }
+
+    .homeTitle {
+        margin-bottom: 17px;
+    }
+
+    .skill {
+        width: 182px;
+        height: 69px;
+        margin: 0 auto 36px;
+        flex: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .skill-icon h4,
+    .skill-icon p {
+        margin: 0;
+    }
+
+    .skill img {
+        min-width: 0;
+        width: 64px;
+        height: 64px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .skill-icon {
+        width: 90%;
+    }
+
+    .homeSkills {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .homeProjects {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        gap: 1px;
+    }
+
+    .projectCard {
+        width: 300px;
+        height: 460px;
+    }
+
+
+
+    .logo {
+        color: #1F2041;
+    }
+
+    .hero .name {
+        font-size: 96px;
+    }
+
+    .topnav .icon {
+    position: fixed;
+    top: 20px;
+    right: 16px;
+    z-index: 1001;
+}
+
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+
+    .topnav a:not(.icon) {
+        display: none;
+    }
+
+    .topnav {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        overflow: hidden;
+    }
+
+    .footer-left {
+        display: none;
+    }
+
+    .footer-right {
+        padding: 60px 18px;
+    }
+
+    footer .logo {
+        color: #ADB6C4;
+    }
+
+    footer {
+        justify-content: center;
+        padding: 0;
+        font-family: Roboto;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .topnav.responsive a.icon {
+        position: absolute;
+        left: 73.5%;
+        top: 10px;
+    }
+
+    .topnav.responsive {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1F2041;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+        z-index: 999;
+        margin-top: 10px;
+    }
+
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        padding: 15px 120px;
+        text-align: left;
+    }
+
+    .projectsPageView {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aboutPageView {
+        width: 95%;
+    }
+
+    .contactPageView {
+        width: 95%;
+        margin: auto;
+    }
+
+    .contactRow {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .main-messages {
+        width: 95%;
+    }
+
+}
+
+.hamburger-icon {
+    color: #ffffff;
+    /* domyślny kolor */
+}
+
+.topnav.responsive .hamburger-icon {
+    color: #D4AF37;
+    /* kolor po kliknięciu */
 }
